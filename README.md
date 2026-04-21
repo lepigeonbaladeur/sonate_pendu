@@ -1,4 +1,4 @@
-Classe inversée
+Classe inversée.
 ===
 
 Création d'un jeu du pendu dans une interface web.
