@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+    background-color: rgb(0, 0, 0);
+    font-family: "Raleway", sans-serif;
+}
+.formulaire{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+}
+.formulaire form{
+    display: flex;
+    gap: 10px;
+}
+.btn-image{
+    background: none;
+    border: none;
+    padding: none;
+    cursor: pointer;
+    background-image: url("/static/UI_Flat_ButtonCheck01a.png");
+    width: 150px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+
+}
+.btn-image:hover{
+    transform: scale(1.05);
+    transition: 0.2s ease;
+}
+
+.inpt-image{
+    background: none;
+    border: none;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-image: url("/static/20240709dragonBarA.png");
+    width: 300px;
+    height: 80px;
+    background-size:100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    box-sizing: border-box;
+    background-color: transparent;
+    font-size: 20px;
+    text-align: center;
+    color: #ffa61f;
+
+}
+.inpt-image::placeholder{
+    color: #ffa51f80;
+    font-style: italic;
+}
+.bloc-princip{
+background-image: url("/static/20240707dragon9SlicesA.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 800px 800px;
+    image-rendering: pixelated;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.rectangle {
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 150px;
+  padding-bottom: 200px;
+  box-sizing: border-box;
+}
+h3 {
+  color: #ffa61f;
+  text-align: center;
+  margin: 0;
+  font-size: 50px;
+  animation: tilt-n-move-shaking 0.5s infinite;
+}
+
+@keyframes tilt-n-move-shaking {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, 5px) rotate(5deg); }
+  50% { transform: translate(0, 0) rotate(0eg); }
+  75% { transform: translate(-5px, 5px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}

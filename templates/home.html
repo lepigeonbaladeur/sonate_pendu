@@ -3,9 +3,15 @@
 {% block title %}Accueil | Jeu du pendu{% endblock %}
 
 {% block content %}
-<form action="/play" method="post">
-    <input type="text" placeholder="Pseudo..." id="pseudo" name="pseudo"/>
-
-    <button type ="submit">Play</button>
-</form>
+<div class="bloc-princip">
+    <div class="rectangle">
+        <h3>Le jeu du pendu</h3>
+        <div class="formulaire">
+            <form action="/play" method="post">
+                <input type="text" class="inpt-image" placeholder="Pseudo..." id="pseudo" name="pseudo"/>
+                <button type ="submit" class="btn-image"></button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
