@@ -3,5 +3,9 @@
 {% block title %}Accueil | Jeu du pendu{% endblock %}
 
 {% block content %}
-  <p>Contenu page d'accueil</p>
+<form action="/play" method="post">
+    <input type="text" placeholder="Pseudo..." id="pseudo" name="pseudo"/>
+
+    <button type ="submit">Play</button>
+</form>
 {% endblock %}
