@@ -58,7 +58,7 @@ body{
     font-style: italic;
 }
 .bloc-princip{
-background-image: url("/static/20240707dragon9SlicesA.png");
+    background-image: url("/static/20240707dragon9SlicesA.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 800px 800px;
@@ -87,7 +87,25 @@ h3 {
   font-size: 50px;
   animation: tilt-n-move-shaking 0.5s infinite;
 }
-
+.clavier{
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    padding-top: 350px;
+    gap: 10px;
+    justify-content: center;
+}
+.btn-letter{
+    height: 50px;
+    width: 30px;
+    background-color: rgba(71, 63, 63, 0.519);
+    color: aliceblue;
+}
+.btn-letter:hover{
+    transform: scale(1.05);
+    transition: 0.2s ease;
+    cursor: pointer;
+}
 @keyframes tilt-n-move-shaking {
   0% { transform: translate(0, 0) rotate(0deg); }
   25% { transform: translate(5px, 5px) rotate(5deg); }

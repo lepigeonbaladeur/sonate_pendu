@@ -3,5 +3,13 @@
 {% block title %}Play | Jeu du pendu{% endblock %}
 
 {% block content %}
-  <p>Et paf ça fait des Chocapic</p>
+  <div class="bloc-princip">
+    <div class="pseudo">
+    </div>
+    <div class="clavier">
+      {% for lettre in clavier %}
+        <button class="btn-letter">{{lettre}}</button>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
