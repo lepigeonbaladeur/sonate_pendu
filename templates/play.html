@@ -4,12 +4,29 @@
 
 {% block content %}
   <div class="bloc-princip">
-    <div class="pseudo">
-    </div>
-    <div class="clavier">
-      {% for lettre in clavier %}
-        <button class="btn-letter">{{lettre}}</button>
-      {% endfor %}
+    <div class="rectangle-jeu">
+      <div class="haut" >
+        <div class="pseudo"><p>{{pseudo }}</p></div>
+        <div class="score">Score: 0</div>
+      </div>
+        <div class="mot">
+          {% for lettre in mot %}
+            {% if lettre in lettres_trouvees %}
+                {{ lettre }}
+            {% else %}
+                _
+              {% endif %}
+          {% endfor %}</div>
+      <div class="clavier">
+      
+        {% for lettre in clavier %}
+        <form action="/guess" method="post">
+          <input type="hidden" name="lettre" value="{{lettre}}">
+          <button class="btn-letter">{{lettre}}</button>
+        </form>
+        {% endfor %}
+      
+      </div>
     </div>
   </div>
 {% endblock %}
