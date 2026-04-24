@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 import string
 import random
 
@@ -16,6 +16,7 @@ def home():
 def play():
     session['vies'] = 5
     session['lettres_trouvees']= []
+    session['score'] = 0
     fichier = r"./dictionnaire.txt"
     lignes = []
     f = open(fichier, "r", encoding="utf-8")
@@ -27,7 +28,7 @@ def play():
     pseudo = request.form["pseudo"]
     session['mot'] = mot
     session['pseudo'] = pseudo
-    return render_template("play.html", clavier = string.ascii_uppercase,pseudo = pseudo, mot=mot, lettres_trouvees=session['lettres_trouvees'])
+    return render_template("play.html", clavier = string.ascii_uppercase,pseudo = pseudo, mot=mot, lettres_trouvees=session['lettres_trouvees'],score=session['score'],  vies=session['vies'])
 
 
 
@@ -38,8 +39,15 @@ def guess():
     mot = session['mot'].upper()
     if lettre in mot:
         session['lettres_trouvees'].append(lettre)
+        session['score'] += 10
         session.modified = True
     else:
         session['vies'] -= 1
-    return render_template("play.html", clavier = string.ascii_uppercase,pseudo = pseudo, mot=mot, lettres_trouvees=session['lettres_trouvees'])
+    if session["vies"]== 0:
+        return redirect("/gameover")
+    return render_template("play.html", clavier=string.ascii_uppercase, pseudo=pseudo, mot=mot, lettres_trouvees=session['lettres_trouvees'], score=session['score'], vies=session['vies'])
 
+@app.route('/gameover', methods=["POST", "GET"])
+def gammeover():
+    pseudo = session["pseudo"]
+    return render_template("gameover.html", pseudo=pseudo, score=session['score'])

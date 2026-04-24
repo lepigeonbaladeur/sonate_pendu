@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 body{
-    background-color: #4D7CFF;
+    background: linear-gradient(135deg , #4D7CFF, #7CFFCB);
     font-family: "Raleway", sans-serif;
     margin: 0;
     overflow: hidden;
+    position: relative;
 }
 .formulaire{
     display: flex;
@@ -19,6 +20,8 @@ body{
     gap: 10px;
 }
 .btn-image{
+    font-family: "Bangers", system-ui; 
+    font-size: 25px;
     background-color: #FF5DA2;
     border-radius: 20px;
     box-shadow: 4px 4px 0px black;
@@ -77,25 +80,28 @@ body{
 .rectangle {
   background-color: #ffb000;
   border-radius: 5%;
+  border: 4px solid black;
+  box-sizing: border-box;
   box-shadow: 20px 10px 10px #2a1f08c8;
   width: 600px;
-  height: 500px;
+  height: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding-top: 150px;
-  padding-bottom: 200px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 
 
 }
 h3 {
   font-family: "Bangers", system-ui;  
-  text-shadow: 5px 2px 2px #2a1f08c8;
+  transform: rotate(-2deg);
+  text-shadow: 8px 3px 3px #2a1f08c8;
   color: #FFF3F8;
   text-align: center;
   margin: 0;
-  font-size: 50px;
+  font-size: 55px;
   animation: tilt-n-move-shaking 3s infinite;
 }
 .clavier{
@@ -180,7 +186,30 @@ p{
     font-size: 25px;
     
 }
-
+.rectangle-over {
+  background-color: #ffb000;
+  border-radius: 5%;
+  box-shadow: 20px 10px 10px #2a1f08c8;
+  width: 600px;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 40px;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+.Gameover{
+  font-family: "Bangers", system-ui;  
+  transform: rotate(-2deg);
+  text-shadow: 8px 3px 3px #2a1f08c8;
+  color: #FFF3F8;
+  text-align: center;
+  margin: 0;
+  font-size: 110px;
+  animation: tilt-n-move-shaking 0.3s infinite;
+}
 @keyframes tilt-n-move-shaking {
   0% { transform: translate(0, 0) rotate(0deg); }
   25% { transform: translate(5px, 5px) rotate(5deg); }

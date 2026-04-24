@@ -11,9 +11,20 @@
         <div class="formulaire">
             <form action="/play" method="post">
                 <input type="text" class="inpt-image" placeholder="Pseudo..." id="pseudo" name="pseudo" required minlength="4" maxlength="12"/>
-                <button type ="submit" class="btn-image">▶</button>
+                <button type ="submit" class="btn-image">Jouer !</button>
             </form>
         </div>
     </div>
 </div>
+<script>for (let i = 0; i < 50; i++) {
+    let etoile = document.createElement("div");
+    etoile.textContent = "✦";
+    etoile.style.position = "absolute";
+    etoile.style.top = Math.random() * 100 + "%";
+    etoile.style.left = Math.random() * 100 + "%";
+    etoile.style.color = "#FFB000";
+    etoile.style.fontSize = Math.random() * 20 + 10 + "px";
+    etoile.style.zIndex = "-1";
+    document.body.appendChild(etoile);
+}</script>
 {% endblock %}

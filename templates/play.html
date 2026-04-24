@@ -6,8 +6,8 @@
   <div class="bloc-princip">
     <div class="rectangle-jeu">
       <div class="haut" >
-        <div class="pseudo"><p>{{pseudo }}</p></div>
-        <div class="score">Score: 0</div>
+        <div class="pseudo"><p>{{pseudo }} {% for i in range(vies) %}🖤{% endfor %}</p></div>
+        <div class="score">Score : {{score}}</div>
       </div>
         <div class="mot">
           {% for lettre in mot %}
@@ -29,4 +29,15 @@
       </div>
     </div>
   </div>
+  <script>for (let i = 0; i < 50; i++) {
+    let etoile = document.createElement("div");
+    etoile.textContent = "✦";
+    etoile.style.position = "absolute";
+    etoile.style.top = Math.random() * 100 + "%";
+    etoile.style.left = Math.random() * 100 + "%";
+    etoile.style.color = "#FFB000";
+    etoile.style.fontSize = Math.random() * 20 + 10 + "px";
+    etoile.style.zIndex = "-1";
+    document.body.appendChild(etoile);
+}</script>
 {% endblock %}
