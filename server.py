@@ -45,6 +45,17 @@ def guess():
         session['vies'] -= 1
     if session["vies"]== 0:
         return redirect("/gameover")
+    lignes = []
+    if len(session['lettres_trouvees']) == len(set(mot)):
+        mot = session['mot'].upper()
+        session['lettres_trouvees']= []
+        fichier = r"./dictionnaire.txt"
+        with open(fichier, "r", encoding="utf-8") as f:
+            for ligne in f:
+                ligne = ligne.rstrip().split(";")[0]
+                lignes.append(ligne)
+        mot=random.choice(lignes)
+        session['mot'] = mot
     return render_template("play.html", clavier=string.ascii_uppercase, pseudo=pseudo, mot=mot, lettres_trouvees=session['lettres_trouvees'], score=session['score'], vies=session['vies'])
 
 @app.route('/gameover', methods=["POST", "GET"])
