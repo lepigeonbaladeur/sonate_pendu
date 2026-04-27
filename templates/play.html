@@ -24,7 +24,7 @@
       <div class="clavier">
       
         {% for lettre in clavier %}
-          <button class="btn-letter" onclick="devinerLettre('{{lettre}}')">{{lettre}}</button>
+          <button class="btn-letter" onclick="devinerLettre('{{lettre}}', this)">{{lettre}}</button>
         {% endfor %}
       
       </div>
@@ -32,9 +32,11 @@
   </div>
   <script>
     let lettresDejaDites = [];
-    function devinerLettre(lettre) {
-      if (lettresDejaDites.includes(lettre)) return;
+    function devinerLettre(lettre, bouton) {
+      if (lettresDejaDites.includes(lettre));
       lettresDejaDites.push(lettre);
+      bouton.disabled = true;
+      bouton.classList.add("btn-used")
     fetch("/guess", {
         method: "POST",
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
