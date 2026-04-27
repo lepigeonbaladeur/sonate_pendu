@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, jsonify
 import string
 import random
+import unicodedata
 
 
 
@@ -44,19 +45,37 @@ def guess():
     else:
         session['vies'] -= 1
     lignes = []
-    if len(session['lettres_trouvees']) == len(set(mot)):
+    if set(session['lettres_trouvees']) == len(set(mot)):
         mot = session['mot'].upper()
         session['lettres_trouvees']= []
         fichier = r"./dictionnaire.txt"
         with open(fichier, "r", encoding="utf-8") as f:
             for ligne in f:
                 ligne = ligne.rstrip().split(";")[0]
+                ligne = unicodedata.normalize('NFKD', ligne).encode('ASCII', 'ignore').decode('ASCII')
                 lignes.append(ligne)
         mot=random.choice(lignes)
         session['mot'] = mot
-    return jsonify({"score": session['score'],"vies": session['vies'],"lettres_trouvees": session['lettres_trouvees'],"mot": session['mot'].upper(),"gameover": session['vies'] == 0})
+    return jsonify({"score": session['score'],"vies": session['vies'],"lettres_trouvees": session['lettres_trouvees'],"mot": session['mot'].upper(),"gameover": session['vies'] == 0, "victoire": len(session['lettres_trouvees'])== len (set(mot))})
 
 @app.route('/gameover', methods=["POST", "GET"])
 def gammeover():
     pseudo = session["pseudo"]
     return render_template("gameover.html", pseudo=pseudo, score=session['score'])
+
+@app.route('/next', methods=["POST", "GET"])
+def next():
+    session['lettres_trouvees'] = []
+    session.modified = True
+    fichier = r"./dictionnaire.txt"
+    lignes = []
+    with open(fichier, "r", encoding="utf-8") as f:
+        for ligne in f:
+            ligne = ligne.rstrip().split(";")[0]
+            ligne = unicodedata.normalize('NFKD', ligne).encode('ASCII', 'ignore').decode('ASCII')
+            lignes.append(ligne)
+    mot=random.choice(lignes)
+    session['mot'] = mot
+    return jsonify({"mot": session['mot'].upper()})
+
+  

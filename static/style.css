@@ -241,6 +241,16 @@ p{
     opacity: 0.4;
     cursor:not-allowed;
 }
+.winner{
+  color: #FFF3F8;
+  text-align: center;
+  margin: 0;
+  font-size: 110px;
+  display: none;
+  font-family: "Bangers", system-ui;
+  text-shadow: 8px 3px 3px #2a1f08c8;
+    
+}
 @keyframes tilt-n-move-shaking {
   0% { transform: translate(0, 0) rotate(0deg); }
   25% { transform: translate(5px, 5px) rotate(5deg); }

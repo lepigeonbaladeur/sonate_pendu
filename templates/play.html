@@ -13,6 +13,10 @@
         <div class="pseudo" id="vies"><p>{% for i in range(vies) %}🖤{% endfor %}</p></div>
         <div class="score" id ="score">Score : {{score}}</div>
       </div>
+        <div class="winner" id ="winner">
+          <p>Bien joué ! </p>
+          <button class="btn-image"onclick="motSuivant()">Suivant !</button>
+        </div>
         <div class="mot" id ="mot">
           {% for lettre in mot %}
             {% if lettre in lettres_trouvees %}
@@ -44,6 +48,7 @@
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data) 
         document.getElementById("score").textContent = "Score:" + data.score;
         let affichage = "";
         for (let lettre of data.mot) {
@@ -65,9 +70,29 @@
         if (data.gameover) {
           window.location.href = "/gameover"
           }
+        if (data.victoire) {
+          document.getElementById("winner").style.display= "block";
+        }
 
     })
 }
+  function motSuivant(){
+    fetch("/next")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("winner").style.display= "none";
+      let affichage ="";
+      for (let lettre of data.mot) {
+        affichage += " _ ";
+      }
+      document.getElementById("mot").textContent = affichage;
+      document.querySelectorAll(".btn-letter").forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove("btn-used");
+      });
+
+    })
+  }
   
   for (let i = 0; i < 50; i++) {
     let etoile = document.createElement("div");
