@@ -3,13 +3,17 @@
 {% block title %}Play | Jeu du pendu{% endblock %}
 
 {% block content %}
+    <audio autoplay loop>
+        <source src="/static/Midnight_Tiptoe.mp3" type="audio/mpeg">
+    </audio>
   <div class="bloc-princip">
     <div class="rectangle-jeu">
       <div class="haut" >
-        <div class="pseudo"><p>{{pseudo }} {% for i in range(vies) %}🖤{% endfor %}</p></div>
-        <div class="score">Score : {{score}}</div>
+        <div class="pseudo" id ="pseudo"><p>{{pseudo }}</p></div>
+        <div class="pseudo" id="vies"><p>{% for i in range(vies) %}🖤{% endfor %}</p></div>
+        <div class="score" id ="score">Score : {{score}}</div>
       </div>
-        <div class="mot">
+        <div class="mot" id ="mot">
           {% for lettre in mot %}
             {% if lettre in lettres_trouvees %}
                 {{ lettre }}
@@ -20,16 +24,50 @@
       <div class="clavier">
       
         {% for lettre in clavier %}
-        <form action="/guess" method="post">
-          <input type="hidden" name="lettre" value="{{lettre}}">
-          <button class="btn-letter">{{lettre}}</button>
-        </form>
+          <button class="btn-letter" onclick="devinerLettre('{{lettre}}')">{{lettre}}</button>
         {% endfor %}
       
       </div>
     </div>
   </div>
-  <script>for (let i = 0; i < 50; i++) {
+  <script>
+    let lettresDejaDites = [];
+    function devinerLettre(lettre) {
+      if (lettresDejaDites.includes(lettre)) return;
+      lettresDejaDites.push(lettre);
+    fetch("/guess", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "lettre=" + lettre
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("score").textContent = "Score:" + data.score;
+        let affichage = "";
+        for (let lettre of data.mot) {
+          if (data.lettres_trouvees.includes(lettre)) {
+            affichage += lettre + " ";
+          } else {
+            affichage += " _ ";
+
+          }
+        }
+        document.getElementById("mot").textContent = affichage;
+
+        let coeurs ="";
+        for (let i = 0; i < data.vies; i++) {
+          coeurs += "🖤";
+        }
+        document.getElementById("vies").textContent = coeurs;
+
+        if (data.gameover) {
+          window.location.href = "/gameover"
+          }
+
+    })
+}
+  
+  for (let i = 0; i < 50; i++) {
     let etoile = document.createElement("div");
     etoile.textContent = "✦";
     etoile.style.position = "absolute";

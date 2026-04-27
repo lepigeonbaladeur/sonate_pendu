@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, jsonify
 import string
 import random
 
@@ -43,8 +43,6 @@ def guess():
         session.modified = True
     else:
         session['vies'] -= 1
-    if session["vies"]== 0:
-        return redirect("/gameover")
     lignes = []
     if len(session['lettres_trouvees']) == len(set(mot)):
         mot = session['mot'].upper()
@@ -56,7 +54,7 @@ def guess():
                 lignes.append(ligne)
         mot=random.choice(lignes)
         session['mot'] = mot
-    return render_template("play.html", clavier=string.ascii_uppercase, pseudo=pseudo, mot=mot, lettres_trouvees=session['lettres_trouvees'], score=session['score'], vies=session['vies'])
+    return jsonify({"score": session['score'],"vies": session['vies'],"lettres_trouvees": session['lettres_trouvees'],"mot": session['mot'].upper(),"gameover": session['vies'] == 0})
 
 @app.route('/gameover', methods=["POST", "GET"])
 def gammeover():
