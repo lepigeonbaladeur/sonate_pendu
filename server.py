@@ -35,7 +35,7 @@ def play():
 
 @app.route('/guess', methods=["POST"])
 def guess():
-    pseudo = session["pseudo"]
+
     lettre = request.form["lettre"]
     mot = session['mot'].upper()
     if lettre in mot:

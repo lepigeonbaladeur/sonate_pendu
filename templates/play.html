@@ -8,6 +8,7 @@
     </audio>
   <div class="bloc-princip">
     <div class="rectangle-jeu">
+      <div class="potence" id ="potence"><button class="ouverture" id="ouverture" onclick="ouverture()"><<</button></div>
       <div class="haut" >
         <div class="pseudo" id ="pseudo"><p>{{pseudo }}</p></div>
         <div class="pseudo" id="vies"><p>{% for i in range(vies) %}🖤{% endfor %}</p></div>
@@ -92,6 +93,18 @@
       });
 
     })
+  }
+  function ouverture(){
+    let potence = document.getElementById("potence");
+    let bouton = document.getElementById("ouverture");
+    potence.classList.toggle("ouvert");
+    if (potence.classList.contains("ouvert")){
+      bouton.innerHTML = "&#x226B;";
+    }else{
+      bouton.innerHTML = "&#x226A;";
+    }
+    
+
   }
   
   for (let i = 0; i < 50; i++) {

@@ -158,6 +158,57 @@ p{
   padding-bottom: 40px;
   padding-top: 5px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+.potence{
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  background-color: #ffb000;
+  border-radius: 5% 0 0 5%;
+  width: 350px;
+  height: 100%;
+  z-index: -1;
+  box-sizing: border-box;
+  border: none;
+}
+.potence::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50px;
+    width: 0;
+    height: 100%;
+    border-right: 2px dashed black;
+    opacity: 0%;
+    transition: opacity 0.3s ease;
+}
+.potence.ouvert{
+    transform: translateX(-300px);
+}
+.potence.ouvert::after{
+    opacity: 1;
+}
+.ouverture{
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 80px;
+    background-color: #ffb000;
+    border: 3px solid black;
+    border-radius: 5%;
+    border-right: none;
+    font-family: "Bangers", system-ui; 
+    font-size: 24px;
+    cursor: pointer;
+}
+.ouverture:hover {
+    background-color: #e69d00;
 }
 .haut{
     box-sizing: border-box;
