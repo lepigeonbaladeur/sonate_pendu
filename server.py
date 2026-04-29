@@ -35,7 +35,6 @@ def play():
 
 @app.route('/guess', methods=["POST"])
 def guess():
-
     lettre = request.form["lettre"]
     mot = session['mot'].upper()
     if lettre in mot:
@@ -65,6 +64,7 @@ def gammeover():
 
 @app.route('/next', methods=["POST", "GET"])
 def next():
+    session['vies'] = 5
     session['lettres_trouvees'] = []
     session.modified = True
     fichier = r"./dictionnaire.txt"
@@ -76,6 +76,6 @@ def next():
             lignes.append(ligne)
     mot=random.choice(lignes)
     session['mot'] = mot
-    return jsonify({"mot": session['mot'].upper()})
+    return jsonify({"mot": session['mot'].upper(), "vies": session['vies']})
 
   
