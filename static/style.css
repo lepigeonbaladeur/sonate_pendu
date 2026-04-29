@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-body{
-    background: linear-gradient(135deg , #4D7CFF, #7CFFCB);
+
+body {
+    background: linear-gradient(135deg, #4D7CFF, #7CFFCB);
     font-family: "Raleway", sans-serif;
     margin: 0;
     overflow: hidden;
     position: relative;
 }
-.formulaire{
+
+.formulaire {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,12 +17,14 @@ body{
     gap: 20px;
 
 }
-.formulaire form{
+
+.formulaire form {
     display: flex;
     gap: 10px;
 }
-.btn-image{
-    font-family: "Bangers", system-ui; 
+
+.btn-image {
+    font-family: "Bangers", system-ui;
     font-size: 25px;
     background-color: #FF5DA2;
     border-radius: 20px;
@@ -36,12 +40,13 @@ body{
     image-rendering: pixelated;
 
 }
-.btn-image:hover{
+
+.btn-image:hover {
     transform: scale(1.05);
     transition: 0.2s ease;
 }
 
-.inpt-image{
+.inpt-image {
     color: #FF5DA2;
     background-color: #FFF3F8;
     border-radius: 20px;
@@ -54,19 +59,22 @@ body{
     font-size: 20px;
     text-align: center;
     border: 4px solid #000000;
-    font-family: "Bangers", system-ui; 
+    font-family: "Bangers", system-ui;
 
 }
-.inpt-image::placeholder{
+
+.inpt-image::placeholder {
     color: #FF5DA2;
     font-style: italic;
-    font-family: "Bangers", system-ui; 
+    font-family: "Bangers", system-ui;
 }
-.inpt-image:hover{
+
+.inpt-image:hover {
     transform: scale(1.01);
     transition: 0.2s ease;
 }
-.bloc-princip{
+
+.bloc-princip {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 800px 800px;
@@ -78,42 +86,48 @@ body{
 }
 
 .rectangle {
-  background-color: #ffb000;
-  border-radius: 5%;
-  border: 4px solid black;
-  box-sizing: border-box;
-  box-shadow: 20px 10px 10px #2a1f08c8;
-  width: 600px;
-  height: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 100px;
-  padding-bottom: 100px;
+    background-color: #ffb000;
+    border-radius: 5%;
+    border: 4px solid black;
+    box-sizing: border-box;
+    box-shadow: 20px 10px 10px #2a1f08c8;
+    width: 600px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 100px;
+    padding-bottom: 100px;
 
 
 }
+
 h3 {
-  font-family: "Bangers", system-ui;  
-  transform: rotate(-2deg);
-  text-shadow: 8px 3px 3px #2a1f08c8;
-  color: #FFF3F8;
-  text-align: center;
-  margin: 0;
-  font-size: 80px;
-  animation: tilt-n-move-shaking 3s infinite;
+    font-family: "Bangers", system-ui;
+    transform: rotate(-2deg);
+    text-shadow: 8px 3px 3px #2a1f08c8;
+    color: #FFF3F8;
+    text-align: center;
+    margin: 0;
+    font-size: 80px;
+    animation: tilt-n-move-shaking 3s infinite;
 }
-.clavier{
+
+.clavier {
     display: flex;
     flex-wrap: wrap;
     width: 600px;
     padding-top: 0px;
     gap: 10px;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+    /* passe au-dessus de .potence */
 }
-.btn-letter{
-    font-family: "Bangers", system-ui; 
+
+.btn-letter {
+    font-family: "Bangers", system-ui;
     height: 50px;
     box-shadow: 10px 5px 5px #2a1f08c8;
     width: 30px;
@@ -121,14 +135,16 @@ h3 {
     background-color: #FFF3F8;
     color: #000000;
 }
-.btn-letter:hover{
+
+.btn-letter:hover {
     transform: scale(1.05);
     transition: 0.2s ease;
     cursor: pointer;
     animation: tilt-n-move-shaking 0.5s infinite;
 }
-.pancarte{
-    font-family: "Bangers", system-ui; 
+
+.pancarte {
+    font-family: "Bangers", system-ui;
     background-color: #775201;
     border: 4px solid #000000;
     border-radius: 20px;
@@ -137,45 +153,50 @@ h3 {
     text-shadow: 5px 2px 2px #2a1f08c8;
     box-shadow: 20px 10px 10px #2a1f08c8;
 }
-.pancarte:hover{
+
+.pancarte:hover {
     transform: scale(1.01);
     transition: 0.2s ease;
 
 }
-p{
+
+p {
     color: #FFF3F8;
 }
+
 .rectangle-jeu {
-  background-color: #ffb000;
-  border-radius: 5%;
-  box-shadow: 20px 10px 10px #2a1f08c8;
-  width: 600px;
-  height: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 40px;
-  padding-top: 5px;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 1;
+    background-color: #ffb000;
+    border-radius: 5%;
+    box-shadow: 20px 10px 10px #2a1f08c8;
+    width: 600px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 40px;
+    padding-top: 5px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
-.potence{
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateX(0);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  background-color: #ffb000;
-  border-radius: 5% 0 0 5%;
-  width: 350px;
-  height: 100%;
-  z-index: -1;
-  box-sizing: border-box;
-  border: none;
+
+.potence {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(0);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color: #ffb000;
+    border-radius: 5% 0 0 5%;
+    width: 350px;
+    height: 100%;
+    z-index: 0;
+    box-sizing: border-box;
+    border: none;
 }
-.potence::after{
+
+.potence::after {
     content: "";
     position: absolute;
     top: 0;
@@ -186,13 +207,86 @@ p{
     opacity: 0%;
     transition: opacity 0.3s ease;
 }
-.potence.ouvert{
+
+.potence.ouvert {
     transform: translateX(-300px);
 }
-.potence.ouvert::after{
+
+.potence.ouvert::after {
     opacity: 1;
 }
-.ouverture{
+
+.controle-volume {
+    display: flex; 
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    pointer-events: auto;
+    cursor: pointer;
+    font-family: "Bangers", system-ui;
+    font-size: 20px; 
+    background-color: #FF5DA2;
+    border-radius: 20px;
+    box-shadow: 4px 4px 0px black;
+    border: 4px solid #000000;
+    width: 200px; 
+    height: 50px;
+    padding: 0 15px;
+}
+.potence.ouvert .controle-volume{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent; 
+    cursor: pointer;
+}
+
+
+#volume-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    background: #000000; 
+    border-radius: 5px;
+}
+
+#volume-slider::-moz-range-track {
+    width: 100%;
+    height: 10px;
+    background: #000000;
+    border-radius: 5px;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    background-color: #FFF3F8; 
+    border: 3px solid #000000;
+    border-radius: 50%;
+    margin-top: -8px;
+    box-shadow: 2px 2px 0px black; 
+}
+
+#volume-slider::-moz-range-thumb {
+    height: 25px;
+    width: 25px;
+    background-color: #FFF3F8;
+    border: 3px solid #000000;
+    border-radius: 50%;
+    box-shadow: 2px 2px 0px black;
+}
+
+.ouverture {
     position: absolute;
     top: 50%;
     left: -40px;
@@ -203,18 +297,25 @@ p{
     border: 3px solid black;
     border-radius: 5%;
     border-right: none;
-    font-family: "Bangers", system-ui; 
+    font-family: "Bangers", system-ui;
     font-size: 24px;
     cursor: pointer;
 }
+
 .ouverture:hover {
     background-color: #e69d00;
 }
-.base, .poutre, .tete, .corps, .membres{
+
+.base,
+.poutre,
+.tete,
+.corps,
+.membres {
     opacity: 0;
     transition: opacity 0.5s ease;
 }
-.base{
+
+.base {
     position: absolute;
     height: 10px;
     width: 150px;
@@ -222,7 +323,8 @@ p{
     bottom: 100px;
     left: 50px;
 }
-.base::after{
+
+.base::after {
     content: "";
     position: absolute;
     background-color: #000000;
@@ -231,16 +333,17 @@ p{
     left: 25%;
     bottom: 0;
 }
-.poutre{
+
+.poutre {
     position: absolute;
     height: 10px;
     width: 150px;
     background-color: #000000;
     bottom: 350px;
-    left:25%
-
+    left: 25%
 }
-.poutre::after{
+
+.poutre::after {
     content: "";
     position: absolute;
     background-color: #000000;
@@ -250,7 +353,8 @@ p{
     left: 95%;
 
 }
-.tete{
+
+.tete {
     position: absolute;
     background-color: #000000;
     width: 50px;
@@ -259,7 +363,8 @@ p{
     bottom: 280px;
     left: 59.5%
 }
-.corps{
+
+.corps {
     position: absolute;
     background-color: #000000;
     height: 100px;
@@ -267,7 +372,8 @@ p{
     bottom: 200px;
     left: 65%;
 }
-.membres{
+
+.membres {
     position: absolute;
     background-color: #000000;
     height: 5px;
@@ -275,7 +381,8 @@ p{
     bottom: 250px;
     left: 53%;
 }
-.membres::before{
+
+.membres::before {
     position: absolute;
     background-color: #000000;
     content: "";
@@ -286,7 +393,8 @@ p{
     left: 30%;
 
 }
-.membres::after{
+
+.membres::after {
     position: absolute;
     background-color: #000000;
     content: "";
@@ -296,14 +404,29 @@ p{
     left: 60%;
     bottom: -100px;
 }
+
 .potence.ouvert .base.visible,
 .potence.ouvert .poutre.visible,
-.potence.ouvert .tete.visible,
-.potence.ouvert .corps.visible,
-.potence.ouvert .membres.visible {
+.potence.ouvert .victime .tete.visible,
+.potence.ouvert .victime .corps.visible,
+.potence.ouvert .victime .membres.visible {
     opacity: 1;
 }
-.haut{
+
+.victime {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: top;
+    transition: transform 0.5s ease-in-out;
+    animation: balancement 5s ease-in-out infinite;
+    pointer-events: none;
+    /* transparent, ne doit pas bloquer les clics */
+}
+
+.haut {
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -311,60 +434,71 @@ p{
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
+    position: relative;
+    z-index: 1;
+    /* passe au-dessus de .potence */
 
 }
-.pseudo{
-    font-family: "Bangers", system-ui; 
-    font-size: 25px;
 
-
-}
-.score{
-    font-family: "Bangers", system-ui; 
+.pseudo {
+    font-family: "Bangers", system-ui;
     font-size: 25px;
 }
-.mot{
+
+.score {
+    font-family: "Bangers", system-ui;
+    font-size: 25px;
+}
+
+.mot {
     display: flex;
-    font-family: "Bangers", system-ui; 
+    font-family: "Bangers", system-ui;
     gap: 25px;
     font-size: 25px;
-    
+    position: relative;
+    z-index: 1;
+    /* passe au-dessus de .potence */
+
 }
+
 .rectangle-over {
-  background-color: #ffb000;
-  border-radius: 5%;
-  box-shadow: 20px 10px 10px #2a1f08c8;
-  width: 600px;
-  height: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  padding-bottom: 40px;
-  padding-top: 5px;
-  box-sizing: border-box;
+    background-color: #ffb000;
+    border-radius: 5%;
+    box-shadow: 20px 10px 10px #2a1f08c8;
+    width: 600px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 40px;
+    padding-top: 5px;
+    box-sizing: border-box;
 }
-.Gameover{
-  font-family: "Bangers", system-ui;  
-  transform: rotate(-2deg);
-  text-shadow: 8px 3px 3px #2a1f08c8;
-  color: #FFF3F8;
-  text-align: center;
-  margin: 0;
-  font-size: 110px;
-  animation: tilt-n-move-shaking 0.3s infinite;
+
+.Gameover {
+    font-family: "Bangers", system-ui;
+    transform: rotate(-2deg);
+    text-shadow: 8px 3px 3px #2a1f08c8;
+    color: #FFF3F8;
+    text-align: center;
+    margin: 0;
+    font-size: 110px;
+    animation: tilt-n-move-shaking 0.3s infinite;
 }
-.merci{
-  transform: rotate(-1deg);
-  font-family: "Bangers", system-ui;  
-  text-shadow: 8px 3px 3px #2a1f08c8;
-  color: #FFF3F8;
-  text-align: center;
-  margin: 0;
-  font-size: 40px;
-  padding-bottom: 20px;
+
+.merci {
+    transform: rotate(-1deg);
+    font-family: "Bangers", system-ui;
+    text-shadow: 8px 3px 3px #2a1f08c8;
+    color: #FFF3F8;
+    text-align: center;
+    margin: 0;
+    font-size: 40px;
+    padding-bottom: 20px;
 }
-.pancarte_over{
+
+.pancarte_over {
     font-family: "Bangers", system-ui;
     height: 130px;
     width: 500px;
@@ -376,29 +510,64 @@ p{
     text-shadow: 5px 2px 2px #2a1f08c8;
     box-shadow: 20px 10px 10px #2a1f08c8;
 }
-.pancarte_over:hover{
+
+.pancarte_over:hover {
     transform: scale(1.01);
     transition: 0.2s ease;
 
 }
-.btn-used{
+
+.btn-used {
     opacity: 0.4;
-    cursor:not-allowed;
+    cursor: not-allowed;
 }
-.winner{
-  color: #FFF3F8;
-  text-align: center;
-  margin: 0;
-  font-size: 110px;
-  display: none;
-  font-family: "Bangers", system-ui;
-  text-shadow: 8px 3px 3px #2a1f08c8;
-    
+
+.winner {
+    color: #FFF3F8;
+    text-align: center;
+    margin: 0;
+    font-size: 110px;
+    display: none;
+    font-family: "Bangers", system-ui;
+    text-shadow: 8px 3px 3px #2a1f08c8;
+
 }
+
 @keyframes tilt-n-move-shaking {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(5px, 5px) rotate(5deg); }
-  50% { transform: translate(0, 0) rotate(0eg); }
-  75% { transform: translate(-5px, 5px) rotate(-5deg); }
-  100% { transform: translate(0, 0) rotate(0deg); }
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(5px, 5px) rotate(5deg);
+    }
+
+    50% {
+        transform: translate(0, 0) rotate(0eg);
+    }
+
+    75% {
+        transform: translate(-5px, 5px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+@keyframes balancement {
+    0% {
+        transform: rotate(-1deg);
+        /* Penche à gauche */
+    }
+
+    50% {
+        transform: rotate(1deg);
+        /* Penche à droite */
+    }
+
+    100% {
+        transform: rotate(-1deg);
+        /* Revient à gauche */
+    }
 }

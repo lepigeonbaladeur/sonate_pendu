@@ -3,60 +3,71 @@
 {% block title %}Play | Jeu du pendu{% endblock %}
 
 {% block content %}
-    <audio autoplay loop>
-        <source src="/static/Midnight_Tiptoe.mp3" type="audio/mpeg">
-    </audio>
-  <div class="bloc-princip">
-    <div class="rectangle-jeu">
-      <div class="potence" id ="potence">
-        <button class="ouverture" id="ouverture" onclick="ouverture()"><<</button>
-        <div class="base" id="base"></div>
-        <div class="poutre" id="poutre"></div>
-        <div class="tete" id="tete"></div>
-        <div class="corps" id="corps"></div>
-        <div class="membres" id="membres"></div>
+<audio autoplay loop id="volume">
+  <source src="/static/Midnight_Tiptoe.mp3" type="audio/mpeg">
+</audio>
+<div class="bloc-princip">
+  <div class="rectangle-jeu">
+    <div class="potence" id="potence">
+      <button class="ouverture" id="ouverture" onclick="ouverture()">
+        << </button>
+          <div class="controle-volume">
+            <label for="volume-slider">Volume</label>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+          </div>
+          <div class="base" id="base"></div>
+          <div class="poutre" id="poutre"></div>
+          <div class="victime">
+            <div class="tete" id="tete"></div>
+            <div class="corps" id="corps"></div>
+            <div class="membres" id="membres"></div>
+          </div>
+    </div>
+    <div class="haut">
+      <div class="pseudo" id="pseudo">
+        <p>{{pseudo }}</p>
       </div>
-      <div class="haut" >
-        <div class="pseudo" id ="pseudo"><p>{{pseudo }}</p></div>
-        <div class="pseudo" id="vies"><p>{% for i in range(vies) %}🖤{% endfor %}</p></div>
-        <div class="score" id ="score">Score : {{score}}</div>
+      <div class="pseudo" id="vies">
+        <p>{% for i in range(vies) %}🖤{% endfor %}</p>
       </div>
-        <div class="winner" id ="winner">
-          <p>Bien joué ! </p>
-          <button class="btn-image"onclick="motSuivant()">Suivant !</button>
-        </div>
-        <div class="mot" id ="mot">
-          {% for lettre in mot %}
-            {% if lettre in lettres_trouvees %}
-                {{ lettre }}
-            {% else %}
-                _
-              {% endif %}
-          {% endfor %}</div>
-      <div class="clavier">
-      
-        {% for lettre in clavier %}
-          <button class="btn-letter" onclick="devinerLettre('{{lettre}}', this)">{{lettre}}</button>
-        {% endfor %}
-      
-      </div>
+      <div class="score" id="score">Score : {{score}}</div>
+    </div>
+    <div class="winner" id="winner">
+      <p>Bien joué ! </p>
+      <button class="btn-image" onclick="motSuivant()">Suivant !</button>
+    </div>
+    <div class="mot" id="mot">
+      {% for lettre in mot %}
+      {% if lettre in lettres_trouvees %}
+      {{ lettre }}
+      {% else %}
+      _
+      {% endif %}
+      {% endfor %}</div>
+    <div class="clavier">
+
+      {% for lettre in clavier %}
+      <button class="btn-letter" onclick="devinerLettre('{{lettre}}', this)">{{lettre}}</button>
+      {% endfor %}
+
     </div>
   </div>
-  <script>
-    let lettresDejaDites = [];
-    function devinerLettre(lettre, bouton) {
-      if (lettresDejaDites.includes(lettre))
+</div>
+<script>
+  let lettresDejaDites = [];
+  function devinerLettre(lettre, bouton) {
+    if (lettresDejaDites.includes(lettre))
       lettresDejaDites.push(lettre);
-      bouton.disabled = true;
-      bouton.classList.add("btn-used")
+    bouton.disabled = true;
+    bouton.classList.add("btn-used")
     fetch("/guess", {
-        method: "POST",
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: "lettre=" + lettre
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "lettre=" + lettre
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data) 
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
         document.getElementById("score").textContent = "Score:" + data.score;
         let affichage = "";
         for (let lettre of data.mot) {
@@ -69,77 +80,84 @@
         }
         document.getElementById("mot").textContent = affichage;
 
-        let coeurs ="";
+        let coeurs = "";
         for (let i = 0; i < data.vies; i++) {
           coeurs += "🖤";
         }
         document.getElementById("vies").textContent = coeurs;
 
-        if (data.vies === 4){
+        if (data.vies === 4) {
           document.getElementById("base").classList.add("visible");
-        }else if (data.vies === 3){
+        } else if (data.vies === 3) {
           document.getElementById("poutre").classList.add("visible");
-        }else if (data.vies === 2){
+        } else if (data.vies === 2) {
           document.getElementById("tete").classList.add("visible");
-        }else if (data.vies === 1){
+        } else if (data.vies === 1) {
           document.getElementById("corps").classList.add("visible");
-        }else if (data.vies === 0){
+        } else if (data.vies === 0) {
           document.getElementById("membres").classList.add("visible");
         }
 
-          
 
-        
+
+
 
         if (data.gameover) {
           window.location.href = "/gameover"
-          }
+        }
         if (data.victoire) {
-          document.getElementById("winner").style.display= "block";
+          document.getElementById("winner").style.display = "block";
         }
 
-    })
-}
-  function motSuivant(){
-    fetch("/next")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("winner").style.display= "none";
-      let affichage ="";
-      for (let lettre of data.mot) {
-        affichage += " _ ";
-      }
-      document.getElementById("mot").textContent = affichage;
-      document.querySelectorAll(".btn-letter").forEach(btn => {
-        btn.disabled = false;
-        btn.classList.remove("btn-used");
-      });
-          document.getElementById("base").classList.remove("visible");
-          document.getElementById("poutre").classList.remove("visible");
-          document.getElementById("tete").classList.remove("visible");
-          document.getElementById("corps").classList.remove("visible");
-          document.getElementById("membres").classList.remove("visible");
-          let coeurs = "";
-          for (let i = 0; i < data.vies; i++) {
-            coeurs += "🖤";
-          }
-          document.getElementById("vies").textContent = coeurs;
-
-    })
+      })
   }
-  function ouverture(){
+  function motSuivant() {
+    fetch("/next")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("winner").style.display = "none";
+        let affichage = "";
+        for (let lettre of data.mot) {
+          affichage += " _ ";
+        }
+        document.getElementById("mot").textContent = affichage;
+        document.querySelectorAll(".btn-letter").forEach(btn => {
+          btn.disabled = false;
+          btn.classList.remove("btn-used");
+        });
+        document.getElementById("base").classList.remove("visible");
+        document.getElementById("poutre").classList.remove("visible");
+        document.getElementById("tete").classList.remove("visible");
+        document.getElementById("corps").classList.remove("visible");
+        document.getElementById("membres").classList.remove("visible");
+        let coeurs = "";
+        for (let i = 0; i < data.vies; i++) {
+          coeurs += "🖤";
+        }
+        document.getElementById("vies").textContent = coeurs;
+
+      })
+  }
+  function ouverture() {
     let potence = document.getElementById("potence");
     let bouton = document.getElementById("ouverture");
     potence.classList.toggle("ouvert");
-    if (potence.classList.contains("ouvert")){
+    if (potence.classList.contains("ouvert")) {
       bouton.innerHTML = "&#x226B;";
-    }else{
+    } else {
       bouton.innerHTML = "&#x226A;";
     }
-    
+
 
   }
-  
+  const jauge = document.getElementById("volume-slider");
+  const musique = document.getElementById("volume");
+  jauge.addEventListener("input", function () {
+    musique.volume = jauge.value
+
+
+  });
+
   for (let i = 0; i < 50; i++) {
     let etoile = document.createElement("div");
     etoile.textContent = "✦";
@@ -150,5 +168,5 @@
     etoile.style.fontSize = Math.random() * 20 + 10 + "px";
     etoile.style.zIndex = "-1";
     document.body.appendChild(etoile);
-}</script>
+  }</script>
 {% endblock %}
