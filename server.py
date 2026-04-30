@@ -23,7 +23,7 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/play", methods=["POST"])
+@app.route("/play", methods=["GET", "POST"])
 def play():
     fichier = r"./dictionnaire.txt"
     lignes = []
