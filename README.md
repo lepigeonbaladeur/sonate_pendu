@@ -1,10 +1,8 @@
-Classe inversée.
-===
+# Classe inversée.
 
 Création d'un jeu du pendu dans une interface web.
 
 Cette documentation est rédigée dans un fichier standard [README.md](./README.md) au format [Markdown](https://fr.wikipedia.org/wiki/Markdown).
-
 
 ## Mise en place
 
@@ -28,9 +26,9 @@ cd sonate_pendu
 
 ## Installation des bibliothèques
 
-On peut employer un fichier (par convention [requirements.txt](./requirements.txt)) pour référencer les bibliothèques  et leurs versions nécessaires au projet.
+On peut employer un fichier (par convention [requirements.txt](./requirements.txt)) pour référencer les bibliothèques et leurs versions nécessaires au projet.
 
-On utilise le gestionnaire de bibliothèques [Pip](https://packaging.python.org/en/latest/tutorials/installing-packages/) pour les installer dans notre *virtual env* : 
+On utilise le gestionnaire de bibliothèques [Pip](https://packaging.python.org/en/latest/tutorials/installing-packages/) pour les installer dans notre _virtual env_ :
 
 ```shell
 pip install -r requirements.txt
@@ -59,7 +57,7 @@ def home():
     return "<p>Hello, World!</p>"
 ```
 
-Notre fichier Python s'appelant `server.py`, on peut lancer l'application avec la commande suivante : 
+Notre fichier Python s'appelant `server.py`, on peut lancer l'application avec la commande suivante :
 
 ```shell
 flask --app server run
@@ -77,13 +75,13 @@ Press CTRL+C to quit
 
 Les informations peuvent être décrites comme suit :
 
-|Log|Description|
-|---|-----------|
-|`Serving Flask app 'server'`|Flask à démarré l'application nommée server en référence au fichier `server.py`|
-|`Debug mode: off`|Le mode de debugging n'est pas actif (voir [Debug Mode](https://flask.palletsprojects.com/en/3.0.x/quickstart/#debug-mode)).|
-|`WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.`|Indication que le serveur démarré est lancé par une commande destinée à un travail de développement. On utilise d'autres utilitaires comme Gunicorn pour faire fonctionner un serveur en production. Pour nos besoins, c'est suffisant.|
-|`Running on http://127.0.0.1:5000`|Le serveur est actif et répond à l'URL [http://127.0.0.1:5000](http://127.0.0.1:5000) (5000 étant le port configuré par défaut). Vous pouvez cliquer sur le lien et ouvrir la page dans un navigateur web.|
-|`Press CTRL+C to quit`|On peut mettre fin au processus en utilisant `CTRL + C`.|
+| Log                                                                                                                      | Description                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Serving Flask app 'server'`                                                                                             | Flask à démarré l'application nommée server en référence au fichier `server.py`                                                                                                                                                         |
+| `Debug mode: off`                                                                                                        | Le mode de debugging n'est pas actif (voir [Debug Mode](https://flask.palletsprojects.com/en/3.0.x/quickstart/#debug-mode)).                                                                                                            |
+| `WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.` | Indication que le serveur démarré est lancé par une commande destinée à un travail de développement. On utilise d'autres utilitaires comme Gunicorn pour faire fonctionner un serveur en production. Pour nos besoins, c'est suffisant. |
+| `Running on http://127.0.0.1:5000`                                                                                       | Le serveur est actif et répond à l'URL [http://127.0.0.1:5000](http://127.0.0.1:5000) (5000 étant le port configuré par défaut). Vous pouvez cliquer sur le lien et ouvrir la page dans un navigateur web.                              |
+| `Press CTRL+C to quit`                                                                                                   | On peut mettre fin au processus en utilisant `CTRL + C`.                                                                                                                                                                                |
 
 ## Développement
 
@@ -99,17 +97,17 @@ C'est fonctionnel mais pour réaliser des mises en forme plus complexes, on se r
 
 En effet, on a besoin d'une structure HTML de base égale pour toutes les pages : on parle de `layout` dans le domaine du développement web.
 
-Un layout (en français *disposition*) est une page HTML structurée pour recevoir du contenu variable (corps de page). Le contenu de la page change en fonction d'où on se situe sur un site web, mais la structure (le layout) ne varie pas.
+Un layout (en français _disposition_) est une page HTML structurée pour recevoir du contenu variable (corps de page). Le contenu de la page change en fonction d'où on se situe sur un site web, mais la structure (le layout) ne varie pas.
 
 Par exemple, une entête avec un menu, un pied de page, sont des éléments qu'on peut intégrer dans un layout car ils restent souvent les mêmes, quelle que soit la page du site.
 
-La première étape est de modifier le fichier [server.py](./server.py) pour qu'il affiche des templates HTML (on parle de *rendering* en anglais) :
+La première étape est de modifier le fichier [server.py](./server.py) pour qu'il affiche des templates HTML (on parle de _rendering_ en anglais) :
 
 [Rendering Templates](https://flask.palletsprojects.com/en/3.0.x/quickstart/#rendering-templates)
 
 Le guide nous indique de faire 2 choses :
 
-1. Modifier notre valeur retour de la sorte : 
+1. Modifier notre valeur retour de la sorte :
 
 ```python
 from flask import Flask, render_template
@@ -130,8 +128,16 @@ def home():
 <h1>Hello, World!</h1>
 ```
 
-Par la suite, on redémmare le serveur : 
+Par la suite, on redémmare le serveur :
 
 ```shell
 flask --app server run
+```
+
+## Variables d'environnement
+
+Copier le fichier `.env.sample` en `.env` et insérer la clé secrète de l'application dans la variable `SECRET_KEY` :
+
+```bash
+cp .env.sample .env
 ```
