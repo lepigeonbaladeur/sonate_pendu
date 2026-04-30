@@ -13,6 +13,11 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 
 
+def set_session_variables(values):
+    for key, val in values.items():
+        session[key] = val
+
+
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -20,9 +25,6 @@ def home():
 
 @app.route("/play", methods=["POST"])
 def play():
-    session["vies"] = 5
-    session["lettres_trouvees"] = []
-    session["score"] = 0
     fichier = r"./dictionnaire.txt"
     lignes = []
     f = open(fichier, "r", encoding="utf-8")
@@ -34,8 +36,16 @@ def play():
 
     mot = random.choice(lignes)
     pseudo = request.form["pseudo"]
-    session["mot"] = mot
-    session["pseudo"] = pseudo
+
+    # Définir en lot les variables de session
+    session_values = {
+        "vies": 5,
+        "lettres_trouvees": [],
+        "score": 0,
+        "pseudo": pseudo,
+        "mot": mot,
+    }
+    set_session_variables(session_values)
 
     return render_template(
         "play.html",
@@ -52,17 +62,21 @@ def play():
 def guess():
     lettre = request.form["lettre"]
     mot = session["mot"].upper()
+
     if lettre in mot:
         session["lettres_trouvees"].append(lettre)
         session["score"] += 10
         session.modified = True
     else:
         session["vies"] -= 1
+
     lignes = []
+
     if set(session["lettres_trouvees"]) == len(set(mot)):
         mot = session["mot"].upper()
         session["lettres_trouvees"] = []
         fichier = r"./dictionnaire.txt"
+
         with open(fichier, "r", encoding="utf-8") as f:
             for ligne in f:
                 ligne = ligne.rstrip().split(";")[0]
@@ -74,6 +88,7 @@ def guess():
                 lignes.append(ligne)
         mot = random.choice(lignes)
         session["mot"] = mot
+
     return jsonify(
         {
             "score": session["score"],
