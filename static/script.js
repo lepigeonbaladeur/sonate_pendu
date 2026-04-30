@@ -77,9 +77,9 @@ function motSuivant() {
     });
 }
 
-function ouverture() {
-  let potence = document.getElementById("potence");
-  let bouton = document.getElementById("ouverture");
+function ouverture(nomPotence, nomBouton) {
+  let potence = document.getElementById(nomPotence);
+  let bouton = document.getElementById(nomBouton);
   potence.classList.toggle("ouvert");
   if (potence.classList.contains("ouvert")) {
     bouton.innerHTML = "&#x226B;";
