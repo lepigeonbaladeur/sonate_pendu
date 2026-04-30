@@ -1,5 +1,24 @@
 let lettresDejaDites = [];
-
+let prixvie = 10;
+let scoreActuel = 0;
+let viesActuelles = 5;
+function acheterVie() {
+  if (scoreActuel >= prixvie) {
+    scoreActuel -= prixvie;
+    viesActuelles += 1;
+    prixvie += 25;
+    document.getElementById("prix-vie").textContent = prixvie;
+    document.getElementById("score").textContent = "Score:" + scoreActuel;
+    fetch("/acheter_vie", { method: "POST" });
+    let coeurs = "";
+    for (let i = 0; i < viesActuelles; i++) {
+      coeurs += "🖤";
+    }
+    document.getElementById("vies").textContent = coeurs;
+  } else {
+    alert("Pas assez de points !");
+  }
+}
 function devinerLettre(lettre, bouton) {
   if (lettresDejaDites.includes(lettre)) lettresDejaDites.push(lettre);
   bouton.disabled = true;
@@ -12,6 +31,8 @@ function devinerLettre(lettre, bouton) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      scoreActuel = data.score;
+      viesActuelles = data.vies;
       document.getElementById("score").textContent = "Score:" + data.score;
       let affichage = "";
       for (let lettre of data.mot) {

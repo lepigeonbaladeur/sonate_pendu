@@ -44,6 +44,7 @@ def play():
         "score": 0,
         "pseudo": pseudo,
         "mot": mot,
+        "prix_vie": 10,
     }
     set_session_variables(session_values)
 
@@ -126,3 +127,9 @@ def next():
     mot = random.choice(lignes)
     session["mot"] = mot
     return jsonify({"mot": session["mot"].upper(), "vies": session["vies"]})
+@app.route('/acheter_vie', methods=['POST'])
+def acheter_vie():
+    session['score'] -= session['prix_vie']
+    session['vies'] += 1
+    session['prix_vie'] += 25
+    return jsonify({"success": True})
