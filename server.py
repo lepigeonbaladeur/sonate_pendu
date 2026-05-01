@@ -31,13 +31,21 @@ def play():
 
     for ligne in f:
         ligne = ligne.rstrip().split(";")[0]
+        ligne = (
+            unicodedata.normalize("NFKD", ligne)
+            .encode("ASCII", "ignore")
+            .decode("ASCII")
+            
+        )
         lignes.append(ligne)
     f.close()
 
     mot = random.choice(lignes)
-    pseudo = request.form["pseudo"]
+    if "pseudo" in request.form:
+        pseudo = request.form['pseudo']
+    else:
+        pseudo = session.get("pseudo", "Invité")
 
-    # Définir en lot les variables de session
     session_values = {
         "vies": 5,
         "lettres_trouvees": [],
@@ -45,6 +53,7 @@ def play():
         "pseudo": pseudo,
         "mot": mot,
         "prix_vie": 10,
+        "prix_purificateur" : 20,
     }
     set_session_variables(session_values)
 
@@ -132,4 +141,10 @@ def acheter_vie():
     session['score'] -= session['prix_vie']
     session['vies'] += 1
     session['prix_vie'] += 25
+    return jsonify({"success": True})
+
+@app.route('/acheter_purificateur', methods = ['POST'])
+def acheter_purificateur():
+    session['score'] -= session['prix_purificateur']
+    session['prix_purificateur'] += 30
     return jsonify({"success": True})

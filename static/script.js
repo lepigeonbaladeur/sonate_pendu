@@ -2,6 +2,51 @@ let lettresDejaDites = [];
 let prixvie = 10;
 let scoreActuel = 0;
 let viesActuelles = 5;
+let prixPurificateur = 20;
+
+function purifier() {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const motSecret = document
+    .getElementById("mot")
+    .textContent.replace(/\s/g, "");
+
+  if (scoreActuel >= prixPurificateur) {
+    const mauvaisesLettres = alphabet.filter((lettre) => {
+      return !lettresDejaDites.includes(lettre) && !motSecret.includes(lettre);
+    });
+
+    if (mauvaisesLettres.length > 0) {
+      let indexAleatoire = Math.floor(Math.random() * mauvaisesLettres.length);
+      let lettreASupprimer = mauvaisesLettres[indexAleatoire];
+
+      let bouton = document.getElementById(lettreASupprimer);
+      if (bouton) {
+        bouton.disabled = true;
+        bouton.classList.add("btn-used");
+      }
+
+      lettresDejaDites.push(lettreASupprimer);
+      scoreActuel -= prixPurificateur;
+      prixPurificateur += 30;
+      document.getElementById("score").textContent = "Score:" + scoreActuel;
+      document.getElementById("prix-purificateur").textContent =
+        prixPurificateur;
+      fetch("/acheter_purificateur", { method: "POST" })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Serveur mis à jour !");
+        });
+
+      document.getElementById("score").textContent = "Score: " + scoreActuel;
+    } else {
+      alert("Toutes les mauvaises lettres sont déjà éliminées !");
+    }
+  } else {
+    alert(
+      "Pas assez de points ! Il vous faut " + prixPurificateur + " points.",
+    );
+  }
+}
 function acheterVie() {
   if (scoreActuel >= prixvie) {
     scoreActuel -= prixvie;
@@ -30,7 +75,6 @@ function devinerLettre(lettre, bouton) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       scoreActuel = data.score;
       viesActuelles = data.vies;
       document.getElementById("score").textContent = "Score:" + data.score;

@@ -2,7 +2,7 @@
 {% block content %}
 <audio autoplay loop id="volume">
   <source
-    src="{{ url_for('static', filename='Midnight_Tiptoe.mp3') }}"
+    src="{{ url_for('static', filename='Almost_Caught.mp3') }}"
     type="audio/mpeg"
   />
 </audio>
@@ -50,6 +50,13 @@
           Acheter une vie : <span id="prix-vie">10</span>pts
         </p>
         <button class="btn-image" onclick="acheterVie()">+1 🖤</button>
+        <p class="pboutique">
+          Grise une lettre sur le clavier :
+          <span id="prix-purificateur">20</span>pts
+        </p>
+        <button class="btn-image" id="btn-purificateur" onclick="purifier()">
+          Acheter
+        </button>
       </div>
     </div>
     <div class="haut">
@@ -71,7 +78,11 @@
     </div>
     <div class="clavier">
       {% for lettre in clavier %}
-      <button class="btn-letter" onclick="devinerLettre('{{lettre}}', this)">
+      <button
+        id="{{lettre}}"
+        class="btn-letter"
+        onclick="devinerLettre('{{lettre}}', this)"
+      >
         {{lettre}}
       </button>
       {% endfor %}

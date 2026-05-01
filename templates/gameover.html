@@ -1,22 +1,25 @@
-{% extends 'layout.html' %}
-
-{% block title %}Game Over | Jeu du pendu{% endblock %}
-
-{% block content %}
-  <div class="bloc-princip">
-    <div class="rectangle-over">
-      <div class="Gameover"><p>GAME OVER</p></div>
-      <div class="pancarte_over"><p class="merci">Merci d'avoir pris le temps de jouer<br> Si cela te tente, tu peux rejouer ! </p></div>
-      <div class="haut" >
-        <div class="pancarteover"></div>
-      </div>
-      <div class="score">Ton score: {{score}}</div>
-      <form action="/" method="get">
-        <div> <button class="btn-image">Rejouer !</button></div>
-      </form>
+{% extends 'layout.html' %} {% block title %}Game Over | Jeu du pendu{% endblock
+%} {% block content %}
+<div class="bloc-princip">
+  <div class="rectangle-over">
+    <div class="Gameover"><p>GAME OVER</p></div>
+    <div class="pancarte_over">
+      <p class="merci">
+        Merci d'avoir pris le temps de jouer<br />
+        Si cela te tente, tu peux rejouer !
+      </p>
     </div>
+    <div class="haut">
+      <div class="pancarteover"></div>
     </div>
-  <script>for (let i = 0; i < 50; i++) {
+    <div class="score">Ton score: {{score}}</div>
+    <form action="/play" method="get">
+      <div><button class="btn-image">Rejouer !</button></div>
+    </form>
+  </div>
+</div>
+<script>
+  for (let i = 0; i < 50; i++) {
     let etoile = document.createElement("div");
     etoile.textContent = "✦";
     etoile.style.position = "absolute";
@@ -26,5 +29,6 @@
     etoile.style.fontSize = Math.random() * 20 + 10 + "px";
     etoile.style.zIndex = "-1";
     document.body.appendChild(etoile);
-}</script>
+  }
+</script>
 {% endblock %}
